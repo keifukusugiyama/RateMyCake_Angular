@@ -1,0 +1,34 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Rate my cakes!
+  </h1>
+
+  <p>Submit a cake to be reviewed</p>
+  <form>
+    <label> Baker Name: 
+      <input type="text" name="newCake.bakerName" [(ngModel)]="newCake.bakerName" >
+    </label>
+    <br>
+    <label>Image URL:
+      <input type="text" name="newCake.imgURL" [(ngModel)]="newCake.imgURL">
+    </label>
+    <input type="submit"  value="Submit" (click)="onSubmitNew()">
+  </form>
+</div>
+
+
+<div  class="cakeList">
+  <div *ngFor="let cake of allCakes">
+    <h2>{{cake.bakerName}}</h2>
+    <img src="{{cake.imgURL}}" alt="image of cake generated via URL" style="width: 200px; height: 200px;">
+    <button (click)="showDetail(cake)" >View Details</button>
+
+    <app-rating [cakeId]="cake._id"></app-rating>
+    
+  </div>
+</div>
+
+<app-details *ngIf="selectedCake" [shownCake]="selectedCake"></app-details>
+
+<router-outlet></router-outlet>
